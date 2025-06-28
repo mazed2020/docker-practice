@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - mern
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/developer
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - mern
+    depends_on:
+      - backend
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - mern
+    volumes:
+      - mongo_data:/data/db
+
+networks:
+  mern:
+    driver: bridge
+
+volumes:
+  mongo_data:
