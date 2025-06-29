@@ -1,5 +1,4 @@
-version: '3.8'
-
+version: "3"
 services:
   backend:
     build: ./backend
@@ -15,11 +14,13 @@ services:
       - mongodb
 
   frontend:
-    build: ./frontend
-    ports:
-      - "5173:5173"
+    build: ./frontend  # ✅ this matches your folder
     volumes:
       - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    command: npm run dev
     networks:
       - mern
     depends_on:

@@ -19,3 +19,10 @@ export const userRead=async(req,res)=>{
     })
 }
 
+export const teasting=(req,res)=>{
+     res.json({
+        status:"success",
+         message:"everything is fine"
+
+     })
+}
